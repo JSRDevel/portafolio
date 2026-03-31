@@ -88,20 +88,17 @@ const HomePage = () => {
                         <Link to="/proyectos" className="font-label text-xs uppercase tracking-widest text-primary border-b border-primary pb-1 hover:text-white hover:border-white transition-colors">Ver Todos</Link>
                     </div>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                        <ProjectCard
-                            id="KW-24"
-                            type="LANDING_PAGE"
-                            title="Kalmar — Atención Gerontológica"
-                            desc="Landing page profesional para clínica de atención gerontológica con blog integrado y diseño responsivo."
-                            img={PROJECTS[0].imgAlt}
-                        />
-                        <ProjectCard
-                            id="BK-23"
-                            type="INVITACIÓN_DIGITAL"
-                            title="Boda Karla & José"
-                            desc="Invitación digital elegante para boda con RSVP en tiempo real, galería fotográfica y mapa interactivo."
-                            img={PROJECTS[1].imgAlt}
-                        />
+                        {PROJECTS.slice(0, 2).map(project => (
+                            <ProjectCard
+                                key={project.id}
+                                id={project.id}
+                                type={project.type}
+                                status={project.status}
+                                title={project.title}
+                                desc={project.shortDesc}
+                                img={project.previewImg}
+                            />
+                        ))}
                     </div>
                 </div>
             </section>

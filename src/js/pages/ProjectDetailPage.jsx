@@ -89,10 +89,10 @@ const ProjectDetailPage = () => {
 
                     {/* Action Buttons */}
                     <div className="flex flex-col sm:flex-row gap-4">
-                        <a href={project.liveUrl} className="flex-1 text-center bg-primary text-white font-label text-xs font-black py-5 uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all rounded-lg">
+                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="flex-1 text-center bg-primary text-white font-label text-xs font-black py-5 uppercase tracking-widest hover:brightness-110 active:scale-95 transition-all rounded-lg">
                             Ejecutar Módulo
                         </a>
-                        <a href={project.repoUrl} className="flex-1 text-center bg-transparent border border-primary text-primary font-label text-xs font-black py-5 uppercase tracking-widest hover:bg-primary/10 active:scale-95 transition-all rounded-lg">
+                        <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="flex-1 text-center bg-transparent border border-primary text-primary font-label text-xs font-black py-5 uppercase tracking-widest hover:bg-primary/10 active:scale-95 transition-all rounded-lg">
                             Ver Código Fuente
                         </a>
                     </div>

@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 const NotFoundPage = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const [countdown, setCountdown] = useState(15);
 
     useEffect(() => {
@@ -49,7 +50,7 @@ const NotFoundPage = () => {
                         <span className="w-2 h-2 bg-green-500 rounded-full"></span>
                     </div>
                     <div className="font-label text-[11px] text-white/50 space-y-1">
-                        <p><span className="text-primary">$</span> route --resolve <span className="text-white/30">"{window.location.hash}"</span></p>
+                        <p><span className="text-primary">$</span> route --resolve <span className="text-white/30">"{location.pathname}"</span></p>
                         <p className="text-primary">ERROR: PATH_UNDEFINED</p>
                         <p><span className="text-primary">$</span> redirect --home --in <span className="text-white">{countdown}s</span></p>
                     </div>

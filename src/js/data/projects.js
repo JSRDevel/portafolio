@@ -12,7 +12,8 @@ export const PROJECTS = [
         fullDesc: 'Landing page profesional diseñada para Kalmar, una clínica especializada en atención gerontológica. El sitio presenta los servicios médicos, equipo profesional y blog informativo. Construida con enfoque mobile-first y optimizada para SEO, cuenta con un diseño elegante que transmite confianza y profesionalismo en el sector salud.',
         tags: ['HTML', 'CSS', 'JAVASCRIPT', 'BOOTSTRAP', 'GITHUB PAGES'],
         img: kalmarImg,
-        imgAlt: kalmarImg,
+        previewImg: kalmarImg,
+        viewLabel: 'VER SITIO',
         liveUrl: 'https://kalmar-atencion-gerontologica.github.io/Kalmar-Web/#blog',
         repoUrl: 'https://github.com/kalmar-atencion-gerontologica/Kalmar-Web',
         features: [
@@ -37,7 +38,8 @@ export const PROJECTS = [
         fullDesc: 'Invitación de boda digital completamente personalizada para Karla y José. Incluye una animación de sobre interactiva al entrar, confirmación de asistencia (RSVP) conectada a Google Sheets en tiempo real, galería de fotos con lightbox, mapa con ubicaciones de la ceremonia y recepción, y un reproductor de música ambiental. Todo alojado en GitHub Pages con una URL personalizada sin costo de dominio.',
         tags: ['HTML', 'CSS', 'JAVASCRIPT', 'GOOGLE APPS SCRIPT', 'GITHUB PAGES'],
         img: bodaMainImg,
-        imgAlt: bodaEnvelopeImg,
+        previewImg: bodaEnvelopeImg,
+        viewLabel: 'VER INVITACIÓN',
         liveUrl: 'https://karla-y-jose.github.io/Web-Boda/',
         repoUrl: 'https://github.com/karla-y-jose/Web-Boda',
         features: [
