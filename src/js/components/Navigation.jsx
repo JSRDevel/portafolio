@@ -33,8 +33,7 @@ const Navigation = () => {
 
     const navLinks = [
         { path: '/', label: 'Inicio' },
-        { path: '/proyectos', label: 'Proyectos' },
-        { path: '/contacto', label: 'Contacto' }
+        { path: '/proyectos', label: 'Proyectos' }
     ];
 
     // Inline styles for reliable transform (avoids Tailwind CSS caching/specificity issues)
