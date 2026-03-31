@@ -1,14 +1,15 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, lazy, Suspense } from 'react'
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom'
 import ParticleBackground from './components/ParticleBackground.jsx'
 import Navigation from './components/Navigation.jsx'
 import Footer from './components/Footer.jsx'
 import ErrorBoundary from './components/ErrorBoundary.jsx'
-import HomePage from './pages/HomePage.jsx'
-import ProjectsPage from './pages/ProjectsPage.jsx'
-import ProjectDetailPage from './pages/ProjectDetailPage.jsx'
-import ContactPage from './pages/ContactPage.jsx'
-import NotFoundPage from './pages/NotFoundPage.jsx'
+
+const HomePage = lazy(() => import('./pages/HomePage.jsx'))
+const ProjectsPage = lazy(() => import('./pages/ProjectsPage.jsx'))
+const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage.jsx'))
+const ContactPage = lazy(() => import('./pages/ContactPage.jsx'))
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage.jsx'))
 
 // ── Page Transition Wrapper ──
 const PageTransition = ({ children }) => {
@@ -40,6 +41,13 @@ const AnimatedPage = ({ component: Component }) => (
     </PageTransition>
 );
 
+// ── Route Loading Fallback ──
+const PageLoader = () => (
+    <div className="min-h-screen flex items-center justify-center bg-background">
+        <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+    </div>
+);
+
 // ── Main App ──
 const App = () => {
     const location = useLocation();
@@ -54,13 +62,15 @@ const App = () => {
             <Navigation />
             <main className="flex-grow relative z-10">
                 <ErrorBoundary>
-                    <Routes>
-                        <Route path="/" element={<AnimatedPage component={HomePage} />} />
-                        <Route path="/proyectos" element={<AnimatedPage component={ProjectsPage} />} />
-                        <Route path="/proyectos/:id" element={<AnimatedPage component={ProjectDetailPage} />} />
-                        <Route path="/contacto" element={<AnimatedPage component={ContactPage} />} />
-                        <Route path="*" element={<AnimatedPage component={NotFoundPage} />} />
-                    </Routes>
+                    <Suspense fallback={<PageLoader />}>
+                        <Routes>
+                            <Route path="/" element={<AnimatedPage component={HomePage} />} />
+                            <Route path="/proyectos" element={<AnimatedPage component={ProjectsPage} />} />
+                            <Route path="/proyectos/:id" element={<AnimatedPage component={ProjectDetailPage} />} />
+                            <Route path="/contacto" element={<AnimatedPage component={ContactPage} />} />
+                            <Route path="*" element={<AnimatedPage component={NotFoundPage} />} />
+                        </Routes>
+                    </Suspense>
                 </ErrorBoundary>
             </main>
             <Footer />

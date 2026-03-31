@@ -4,6 +4,9 @@ const ParticleBackground = () => {
     const canvasRef = useRef(null);
 
     useEffect(() => {
+        // Respect user's motion preference — skip animation entirely
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
         let animationId;

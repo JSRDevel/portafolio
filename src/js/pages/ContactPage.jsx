@@ -2,8 +2,19 @@ import { useState } from 'react'
 
 const WHATSAPP_NUMBER = '523313331634'
 
+const INITIAL_ERRORS = { nombre: '', contacto: '', detalles: '' };
+
 const ContactPage = () => {
     const [submitted, setSubmitted] = useState(false);
+    const [errors, setErrors] = useState(INITIAL_ERRORS);
+
+    const validate = (nombre, contacto, detalles) => {
+        const next = { nombre: '', contacto: '', detalles: '' };
+        if (nombre.trim().length < 2) next.nombre = 'Ingresa tu nombre completo.';
+        if (contacto.trim().length < 5) next.contacto = 'Ingresa un correo o número de WhatsApp válido.';
+        if (detalles.trim().length < 10) next.detalles = 'Por favor describe tu proyecto con más detalle.';
+        return next;
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -13,8 +24,15 @@ const ContactPage = () => {
         const tipo = form.tipo.value;
         const detalles = form.detalles.value;
 
+        const next = validate(nombre, contacto, detalles);
+        if (Object.values(next).some(Boolean)) {
+            setErrors(next);
+            return;
+        }
+        setErrors(INITIAL_ERRORS);
+
         const message =
-            `Hola JSRDev! 👋\n\n*Nombre:* ${nombre}\n*Contacto:* ${contacto}\n*Tipo de proyecto:* ${tipo}\n\n*Detalles:*\n${detalles}`;
+            `Hola JSRDev! 👋\n\n*Nombre:* ${nombre.trim()}\n*Contacto:* ${contacto.trim()}\n*Tipo de proyecto:* ${tipo}\n\n*Detalles:*\n${detalles.trim()}`;
 
         const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
         window.open(url, '_blank', 'noopener,noreferrer');
@@ -56,10 +74,12 @@ const ContactPage = () => {
                             <div className="space-y-2">
                                 <label htmlFor="nombre" className="block font-label text-[11px] font-bold tracking-widest text-primary uppercase">01_Nombre_Completo</label>
                                 <input id="nombre" name="nombre" required className="w-full bg-surface-container-lowest border-0 border-b border-outline-variant focus:border-primary focus:ring-0 text-white font-body py-4 transition-all placeholder:text-outline/30" placeholder="Tu nombre..." type="text"/>
+                                {errors.nombre && <p className="font-label text-[10px] text-red-400 tracking-wide">{errors.nombre}</p>}
                             </div>
                             <div className="space-y-2">
                                 <label htmlFor="contacto" className="block font-label text-[11px] font-bold tracking-widest text-primary uppercase">02_Correo_o_Teléfono</label>
                                 <input id="contacto" name="contacto" required className="w-full bg-surface-container-lowest border-0 border-b border-outline-variant focus:border-primary focus:ring-0 text-white font-body py-4 transition-all placeholder:text-outline/30" placeholder="correo@ejemplo.com o WhatsApp..." type="text"/>
+                                {errors.contacto && <p className="font-label text-[10px] text-red-400 tracking-wide">{errors.contacto}</p>}
                             </div>
                             <div className="space-y-2">
                                 <label htmlFor="tipo" className="block font-label text-[11px] font-bold tracking-widest text-primary uppercase">03_Tipo_de_Proyecto</label>
@@ -75,6 +95,7 @@ const ContactPage = () => {
                             <div className="space-y-2">
                                 <label htmlFor="detalles" className="block font-label text-[11px] font-bold tracking-widest text-primary uppercase">04_Detalles</label>
                                 <textarea id="detalles" name="detalles" required className="w-full bg-surface-container-lowest border-0 border-b border-outline-variant focus:border-primary focus:ring-0 text-white font-body py-4 transition-all placeholder:text-outline/30 resize-none" placeholder="Cuéntanos sobre tu evento o negocio, fecha, y cualquier detalle importante..." rows="4"></textarea>
+                                {errors.detalles && <p className="font-label text-[10px] text-red-400 tracking-wide">{errors.detalles}</p>}
                             </div>
                             <div className="pt-6">
                                 <button className="w-full md:w-auto bg-primary text-white px-12 py-5 font-headline font-black uppercase tracking-tighter text-lg hover:brightness-110 transition-all active:scale-[0.98] flex items-center justify-center gap-4 rounded-lg" type="submit">
